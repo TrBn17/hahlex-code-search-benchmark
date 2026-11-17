@@ -1,16 +1,16 @@
 # Hahlex LMS — Code Search Benchmark (Phases 1–4)
 
-Đánh giá thực nghiệm hiệu quả của các công cụ và chiến lược tìm kiếm mã nguồn (`Baseline`, `ripgrep`, `CodeGraph`, `Graphify`, `Adaptive Search`) cho AI Coding Agent trên dự án **Hahlex LMS** (`education-platform` NestJS/TypeScript + `ai-platform` Python/FastAPI).
+Empirical evaluation of code search tools and strategies (`Baseline`, `ripgrep`, `CodeGraph`, `Graphify`, and `Adaptive Search`) for AI Coding Agents on the **Hahlex LMS** codebase (`education-platform` NestJS/TypeScript + `ai-platform` Python/FastAPI).
 
-**Kết luận cuối cùng (Phase 4):** Chọn **`ripgrep` (`rg`)** làm chiến lược tìm kiếm mặc định trong `AGENTS.md`. Khi áp dụng Adaptive v1 (*chỉ gọi CodeGraph nếu `rg` chưa đủ bằng chứng*), `12/12` phiên agent đều tự dừng ở `rg` + `read_file` (`0/12` gọi CodeGraph) và đạt **100% task pass rate** với **0** critical files bị sót.
+**Final Conclusion (Phase 4):** **`ripgrep` (`rg`)** was selected as the default code-search strategy in `AGENTS.md`. Under `Adaptive v1` (*escalate to CodeGraph only if `rg` does not provide sufficient evidence*), **12/12** agent sessions stayed on `rg` + `read_file` (**0/12** CodeGraph calls) and achieved a **100% task pass rate** with **0** missed critical files.
 
 ---
 
-## Kết quả Tổng hợp qua 4 Phase
+## Summary of Results Across Phases 1–4
 
-### Phase 4 — Final Validation: `ripgrep` vs `Adaptive v1` (24 phiên Agent, `flash`, T2–T5 × 3 reps)
+### Phase 4 — Final Validation: `ripgrep` vs `Adaptive v1` (24 Agent Sessions, `flash`, T2–T5 × 3 reps)
 
-> Xem chi tiết: [docs/code-search-final-benchmark.md](docs/code-search-final-benchmark.md) · Dữ liệu: [phase4/summary.json](benchmarks/code-search/phase4/summary.json)
+> Full report: [docs/code-search-final-benchmark.md](docs/code-search-final-benchmark.md) · Raw summary: [phase4/summary.json](benchmarks/code-search/phase4/summary.json)
 
 | Metric | Arm B (`ripgrep-only`, n=12) Mean \| Med \| Min–Max | Arm D (`Adaptive v1`, n=12) Mean \| Med \| Min–Max |
 |---|---|---|
@@ -22,12 +22,12 @@
 | **Time to Relevant Context** | 20.8s \| 14.5s \| 3.0–68.0s | 13.4s \| 4.5s \| 3.0–58.0s |
 | **E2E Completion Time** | 89.7s \| 88.0s \| 38.0–144.0s | 92.5s \| 65.5s \| 41.0–197.0s |
 | **LLM Turns / Tool Calls** | 11.3 / 24.8 | 11.2 / 23.9 |
-| **CodeGraph Calls / Time** | 0.00 / 0.0s | **0.00 / 0.0s (0/12 phiên gọi CodeGraph)** |
+| **CodeGraph Calls / Time** | 0.00 / 0.0s | **0.00 / 0.0s (0/12 sessions called CodeGraph)** |
 | **Input / Output Tokens** | 90,065 / 10,235 | 75,351 / 9,857 |
 | **Duplicate File Reads** | 3.42 \| 3.0 \| 0–9 | 3.17 \| 2.5 \| 0–9 |
 | **API Cost (USD)** | `N/A` (internal `flash` pricing not exposed) | `N/A` |
 
-#### Chi tiết theo từng Task (Phase 4, `n = 3` / cell)
+#### Per-Task Breakdown (Phase 4, `n = 3` per cell)
 
 | Task × Arm | Pass | P / R / F1 (Mean) | Context Time Mean (Med) | E2E Mean (Med, Min–Max) | Turns / Tools | Input / Output Tokens | Dup Reads |
 |---|---:|---|---|---|---|---|---|
@@ -42,9 +42,9 @@
 
 ---
 
-### Phase 3 — Graphify vs CodeGraph vs ripgrep vs Adaptive (30 phiên Agent, `n = 5` / arm)
+### Phase 3 — Graphify vs CodeGraph vs ripgrep vs Adaptive (30 Agent Sessions, `n = 5` per arm)
 
-> Xem chi tiết: [docs/code-search-graphify-benchmark.md](docs/code-search-graphify-benchmark.md) · Dữ liệu: [phase3/phase3_summary.json](benchmarks/code-search/phase3/phase3_summary.json)
+> Full report: [docs/code-search-graphify-benchmark.md](docs/code-search-graphify-benchmark.md) · Raw summary: [phase3/phase3_summary.json](benchmarks/code-search/phase3/phase3_summary.json)
 
 | Arm (`n = 5`) | Task Success | Recall / Precision / F1 | Mean Context Time | Mean E2E (Median) | LLM Turns / Tools | Input / Output Tokens |
 |---|---:|---|---:|---:|---:|---:|
@@ -57,9 +57,9 @@
 
 ---
 
-### Phase 2 — Agent-Level Benchmark (20 phiên Agent, `n = 5` / arm)
+### Phase 2 — Agent-Level Benchmark (20 Agent Sessions, `n = 5` per arm)
 
-> Xem chi tiết: [docs/code-search-agent-benchmark.md](docs/code-search-agent-benchmark.md) · Dữ liệu: [agent_summary.json](benchmarks/code-search/agent_summary.json)
+> Full report: [docs/code-search-agent-benchmark.md](docs/code-search-agent-benchmark.md) · Raw summary: [agent_summary.json](benchmarks/code-search/agent_summary.json)
 
 | Arm (`n = 5`) | Task Success | Recall / Precision | Mean Context Time | Mean E2E | LLM Turns / Tools | Input / Output Tokens |
 |---|---:|---|---:|---:|---:|---:|
@@ -70,11 +70,11 @@
 
 ---
 
-### Phase 1 — Tool-Level Benchmark (60 lượt chạy, 5 Tasks × 4 Methods × 3 reps)
+### Phase 1 — Tool-Level Benchmark (60 Runs, 5 Tasks × 4 Methods × 3 reps)
 
-> Xem chi tiết: [docs/code-search-benchmark.md](docs/code-search-benchmark.md) · Dữ liệu: [summary.json](benchmarks/code-search/summary.json)
+> Full report: [docs/code-search-benchmark.md](docs/code-search-benchmark.md) · Raw summary: [summary.json](benchmarks/code-search/summary.json)
 
-| Tiêu chí | Baseline (`git grep`) | ripgrep (`rg`) | CodeGraph (`codegraph`) | Hybrid (`rg` + `codegraph`) |
+| Metric | Baseline (`git grep`) | ripgrep (`rg`) | CodeGraph (`codegraph`) | Hybrid (`rg` + `codegraph`) |
 |---|---:|---:|---:|---:|
 | **Median Search Latency** | 427.00 ms | **83.81 ms** | 1,208.94 ms | 974.96 ms |
 | **Median Tool E2E** | 428.18 ms | **85.21 ms** | 1,208.94 ms | 977.63 ms |
@@ -87,11 +87,11 @@
 
 ---
 
-## Cấu trúc Repository
+## Repository Structure
 
-- [benchmarks/code-search/tasks.json](benchmarks/code-search/tasks.json) — 5 task đại diện trên LMS (`T1–T5`) và ground truth
-- [benchmarks/code-search/run_benchmark.py](benchmarks/code-search/run_benchmark.py) — Script Phase 1
-- [benchmarks/code-search/analyze_agent_runs.py](benchmarks/code-search/analyze_agent_runs.py) — Script Phase 2
-- [benchmarks/code-search/phase3/analyze_phase3.py](benchmarks/code-search/phase3/analyze_phase3.py) — Script Phase 3
-- [benchmarks/code-search/phase4/analyze_phase4.py](benchmarks/code-search/phase4/analyze_phase4.py) — Script Phase 4
-- [docs/](docs/) — Toàn bộ 4 báo cáo chi tiết (`code-search-benchmark.md`, `code-search-agent-benchmark.md`, `code-search-graphify-benchmark.md`, `code-search-final-benchmark.md`)
+- [benchmarks/code-search/tasks.json](benchmarks/code-search/tasks.json) — 5 representative LMS tasks (`T1–T5`) and ground truth
+- [benchmarks/code-search/run_benchmark.py](benchmarks/code-search/run_benchmark.py) — Phase 1 tool-level benchmark runner
+- [benchmarks/code-search/analyze_agent_runs.py](benchmarks/code-search/analyze_agent_runs.py) — Phase 2 agent transcript analyzer
+- [benchmarks/code-search/phase3/analyze_phase3.py](benchmarks/code-search/phase3/analyze_phase3.py) — Phase 3 analyzer
+- [benchmarks/code-search/phase4/analyze_phase4.py](benchmarks/code-search/phase4/analyze_phase4.py) — Phase 4 analyzer (`results.json`, `summary.json`)
+- [docs/](docs/) — Detailed reports (`code-search-benchmark.md`, `code-search-agent-benchmark.md`, `code-search-graphify-benchmark.md`, `code-search-final-benchmark.md`)
