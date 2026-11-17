@@ -1,0 +1,1133 @@
+{
+  "meta": {
+    "phase": "phase4",
+    "model": "flash",
+    "arms": [
+      "ripgrep",
+      "adaptive_v1"
+    ],
+    "tasks": [
+      "T2",
+      "T3",
+      "T4",
+      "T5"
+    ],
+    "repetitions_per_task_arm": 3,
+    "total_sessions": 24,
+    "pricing_note": "N/A - internal Antigravity flash model token pricing is not exposed"
+  },
+  "overall_by_arm": {
+    "ripgrep": {
+      "sessions": 12,
+      "task_pass_count": 12,
+      "task_pass_rate": 1.0,
+      "avg_quality_pct": 100.0,
+      "runtime_error_sessions": 1,
+      "protocol_violation_sessions": 0,
+      "api_cost_usd": "N/A",
+      "e2e_duration_s": {
+        "mean": 89.667,
+        "median": 88.0,
+        "min": 38.0,
+        "max": 144.0
+      },
+      "time_to_relevant_context_s": {
+        "mean": 20.833,
+        "median": 14.5,
+        "min": 3.0,
+        "max": 68.0
+      },
+      "planner_turns": {
+        "mean": 11.333,
+        "median": 11.0,
+        "min": 9,
+        "max": 15
+      },
+      "tool_calls_total": {
+        "mean": 24.833,
+        "median": 24.5,
+        "min": 12,
+        "max": 37
+      },
+      "codegraph_calls": {
+        "mean": 0,
+        "median": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "codegraph_time_s": {
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "total_tool_overhead_s": {
+        "mean": 92.583,
+        "median": 93.5,
+        "min": 47.0,
+        "max": 128.0
+      },
+      "input_tokens": {
+        "mean": 90064.917,
+        "median": 82417.5,
+        "min": 59817,
+        "max": 129997
+      },
+      "cache_read_tokens": {
+        "mean": 454426,
+        "median": 365708.5,
+        "min": 189394,
+        "max": 858925
+      },
+      "output_tokens": {
+        "mean": 10235.167,
+        "median": 10447.0,
+        "min": 6374,
+        "max": 14081
+      },
+      "total_tokens": {
+        "mean": 100300.083,
+        "median": 95324.0,
+        "min": 66191,
+        "max": 141975
+      },
+      "unique_files_read": {
+        "mean": 15.083,
+        "median": 15.0,
+        "min": 6,
+        "max": 29
+      },
+      "duplicate_file_reads": {
+        "mean": 3.417,
+        "median": 3.0,
+        "min": 0,
+        "max": 9
+      },
+      "precision": {
+        "mean": 0.436,
+        "median": 0.408,
+        "min": 0.25,
+        "max": 0.619
+      },
+      "recall": {
+        "mean": 0.869,
+        "median": 0.857,
+        "min": 0.667,
+        "max": 1.0
+      },
+      "f1": {
+        "mean": 0.576,
+        "median": 0.545,
+        "min": 0.37,
+        "max": 0.765
+      },
+      "missed_critical_count": {
+        "mean": 0,
+        "median": 0.0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "adaptive_v1": {
+      "sessions": 12,
+      "task_pass_count": 12,
+      "task_pass_rate": 1.0,
+      "avg_quality_pct": 100.0,
+      "runtime_error_sessions": 1,
+      "protocol_violation_sessions": 0,
+      "api_cost_usd": "N/A",
+      "e2e_duration_s": {
+        "mean": 92.5,
+        "median": 65.5,
+        "min": 41.0,
+        "max": 197.0
+      },
+      "time_to_relevant_context_s": {
+        "mean": 13.417,
+        "median": 4.5,
+        "min": 3.0,
+        "max": 58.0
+      },
+      "planner_turns": {
+        "mean": 11.25,
+        "median": 10.0,
+        "min": 7,
+        "max": 16
+      },
+      "tool_calls_total": {
+        "mean": 23.917,
+        "median": 24.5,
+        "min": 13,
+        "max": 36
+      },
+      "codegraph_calls": {
+        "mean": 0,
+        "median": 0.0,
+        "min": 0,
+        "max": 0
+      },
+      "codegraph_time_s": {
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "total_tool_overhead_s": {
+        "mean": 98.417,
+        "median": 78.5,
+        "min": 48.0,
+        "max": 186.0
+      },
+      "input_tokens": {
+        "mean": 75350.833,
+        "median": 70679.5,
+        "min": 46950,
+        "max": 107605
+      },
+      "cache_read_tokens": {
+        "mean": 471144.167,
+        "median": 382265.0,
+        "min": 171211,
+        "max": 824742
+      },
+      "output_tokens": {
+        "mean": 9857.25,
+        "median": 9887.5,
+        "min": 6159,
+        "max": 14282
+      },
+      "total_tokens": {
+        "mean": 85208.083,
+        "median": 78941.0,
+        "min": 53109,
+        "max": 121887
+      },
+      "unique_files_read": {
+        "mean": 13.917,
+        "median": 13.0,
+        "min": 4,
+        "max": 23
+      },
+      "duplicate_file_reads": {
+        "mean": 3.167,
+        "median": 2.5,
+        "min": 0,
+        "max": 9
+      },
+      "precision": {
+        "mean": 0.469,
+        "median": 0.427,
+        "min": 0.31,
+        "max": 0.722
+      },
+      "recall": {
+        "mean": 0.86,
+        "median": 0.857,
+        "min": 0.667,
+        "max": 1.0
+      },
+      "f1": {
+        "mean": 0.6,
+        "median": 0.567,
+        "min": 0.439,
+        "max": 0.839
+      },
+      "missed_critical_count": {
+        "mean": 0,
+        "median": 0.0,
+        "min": 0,
+        "max": 0
+      }
+    }
+  },
+  "by_task_and_arm": {
+    "T2_ripgrep": {
+      "sessions": 3,
+      "task_pass_count": 3,
+      "task_pass_rate": 1.0,
+      "avg_quality_pct": 100.0,
+      "runtime_error_sessions": 0,
+      "protocol_violation_sessions": 0,
+      "api_cost_usd": "N/A",
+      "e2e_duration_s": {
+        "mean": 66.333,
+        "median": 62.0,
+        "min": 38.0,
+        "max": 99.0
+      },
+      "time_to_relevant_context_s": {
+        "mean": 6.667,
+        "median": 6.0,
+        "min": 3.0,
+        "max": 11.0
+      },
+      "planner_turns": {
+        "mean": 9,
+        "median": 9,
+        "min": 9,
+        "max": 9
+      },
+      "tool_calls_total": {
+        "mean": 18.333,
+        "median": 19,
+        "min": 16,
+        "max": 20
+      },
+      "codegraph_calls": {
+        "mean": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "codegraph_time_s": {
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "total_tool_overhead_s": {
+        "mean": 81.0,
+        "median": 81.0,
+        "min": 47.0,
+        "max": 115.0
+      },
+      "input_tokens": {
+        "mean": 63686,
+        "median": 62165,
+        "min": 59817,
+        "max": 69076
+      },
+      "cache_read_tokens": {
+        "mean": 306422.667,
+        "median": 301958,
+        "min": 291856,
+        "max": 325454
+      },
+      "output_tokens": {
+        "mean": 6889.333,
+        "median": 6844,
+        "min": 6374,
+        "max": 7450
+      },
+      "total_tokens": {
+        "mean": 70575.333,
+        "median": 69615,
+        "min": 66191,
+        "max": 75920
+      },
+      "unique_files_read": {
+        "mean": 9.333,
+        "median": 10,
+        "min": 8,
+        "max": 10
+      },
+      "duplicate_file_reads": {
+        "mean": 5.333,
+        "median": 5,
+        "min": 5,
+        "max": 6
+      },
+      "precision": {
+        "mean": 0.454,
+        "median": 0.444,
+        "min": 0.417,
+        "max": 0.5
+      },
+      "recall": {
+        "mean": 0.778,
+        "median": 0.833,
+        "min": 0.667,
+        "max": 0.833
+      },
+      "f1": {
+        "mean": 0.571,
+        "median": 0.556,
+        "min": 0.533,
+        "max": 0.625
+      },
+      "missed_critical_count": {
+        "mean": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "T2_adaptive_v1": {
+      "sessions": 3,
+      "task_pass_count": 3,
+      "task_pass_rate": 1.0,
+      "avg_quality_pct": 100.0,
+      "runtime_error_sessions": 1,
+      "protocol_violation_sessions": 0,
+      "api_cost_usd": "N/A",
+      "e2e_duration_s": {
+        "mean": 54.667,
+        "median": 56.0,
+        "min": 41.0,
+        "max": 67.0
+      },
+      "time_to_relevant_context_s": {
+        "mean": 3.333,
+        "median": 3.0,
+        "min": 3.0,
+        "max": 4.0
+      },
+      "planner_turns": {
+        "mean": 10,
+        "median": 10,
+        "min": 10,
+        "max": 10
+      },
+      "tool_calls_total": {
+        "mean": 23.667,
+        "median": 23,
+        "min": 22,
+        "max": 26
+      },
+      "codegraph_calls": {
+        "mean": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "codegraph_time_s": {
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "total_tool_overhead_s": {
+        "mean": 65.0,
+        "median": 64.0,
+        "min": 57.0,
+        "max": 74.0
+      },
+      "input_tokens": {
+        "mean": 67963.333,
+        "median": 66832,
+        "min": 64011,
+        "max": 73047
+      },
+      "cache_read_tokens": {
+        "mean": 374620.667,
+        "median": 369639,
+        "min": 359332,
+        "max": 394891
+      },
+      "output_tokens": {
+        "mean": 7982.667,
+        "median": 7346,
+        "min": 6559,
+        "max": 10043
+      },
+      "total_tokens": {
+        "mean": 75946,
+        "median": 76875,
+        "min": 70570,
+        "max": 80393
+      },
+      "unique_files_read": {
+        "mean": 11.333,
+        "median": 11,
+        "min": 11,
+        "max": 12
+      },
+      "duplicate_file_reads": {
+        "mean": 7.667,
+        "median": 7,
+        "min": 7,
+        "max": 9
+      },
+      "precision": {
+        "mean": 0.481,
+        "median": 0.455,
+        "min": 0.364,
+        "max": 0.625
+      },
+      "recall": {
+        "mean": 0.778,
+        "median": 0.833,
+        "min": 0.667,
+        "max": 0.833
+      },
+      "f1": {
+        "mean": 0.591,
+        "median": 0.588,
+        "min": 0.471,
+        "max": 0.714
+      },
+      "missed_critical_count": {
+        "mean": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "T3_ripgrep": {
+      "sessions": 3,
+      "task_pass_count": 3,
+      "task_pass_rate": 1.0,
+      "avg_quality_pct": 100.0,
+      "runtime_error_sessions": 0,
+      "protocol_violation_sessions": 0,
+      "api_cost_usd": "N/A",
+      "e2e_duration_s": {
+        "mean": 109.0,
+        "median": 116.0,
+        "min": 95.0,
+        "max": 116.0
+      },
+      "time_to_relevant_context_s": {
+        "mean": 36.667,
+        "median": 26.0,
+        "min": 19.0,
+        "max": 65.0
+      },
+      "planner_turns": {
+        "mean": 13,
+        "median": 15,
+        "min": 9,
+        "max": 15
+      },
+      "tool_calls_total": {
+        "mean": 27.667,
+        "median": 34,
+        "min": 12,
+        "max": 37
+      },
+      "codegraph_calls": {
+        "mean": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "codegraph_time_s": {
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "total_tool_overhead_s": {
+        "mean": 98.333,
+        "median": 108.0,
+        "min": 73.0,
+        "max": 114.0
+      },
+      "input_tokens": {
+        "mean": 125247,
+        "median": 127094,
+        "min": 118650,
+        "max": 129997
+      },
+      "cache_read_tokens": {
+        "mean": 578127.667,
+        "median": 686064,
+        "min": 189394,
+        "max": 858925
+      },
+      "output_tokens": {
+        "mean": 10900.333,
+        "median": 11978,
+        "min": 7987,
+        "max": 12736
+      },
+      "total_tokens": {
+        "mean": 136147.333,
+        "median": 135081,
+        "min": 131386,
+        "max": 141975
+      },
+      "unique_files_read": {
+        "mean": 17.667,
+        "median": 20,
+        "min": 7,
+        "max": 26
+      },
+      "duplicate_file_reads": {
+        "mean": 2.333,
+        "median": 2,
+        "min": 0,
+        "max": 5
+      },
+      "precision": {
+        "mean": 0.35,
+        "median": 0.4,
+        "min": 0.25,
+        "max": 0.4
+      },
+      "recall": {
+        "mean": 0.809,
+        "median": 0.857,
+        "min": 0.714,
+        "max": 0.857
+      },
+      "f1": {
+        "mean": 0.487,
+        "median": 0.545,
+        "min": 0.37,
+        "max": 0.545
+      },
+      "missed_critical_count": {
+        "mean": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "T3_adaptive_v1": {
+      "sessions": 3,
+      "task_pass_count": 3,
+      "task_pass_rate": 1.0,
+      "avg_quality_pct": 100.0,
+      "runtime_error_sessions": 0,
+      "protocol_violation_sessions": 0,
+      "api_cost_usd": "N/A",
+      "e2e_duration_s": {
+        "mean": 173.667,
+        "median": 164.0,
+        "min": 160.0,
+        "max": 197.0
+      },
+      "time_to_relevant_context_s": {
+        "mean": 42.0,
+        "median": 38.0,
+        "min": 30.0,
+        "max": 58.0
+      },
+      "planner_turns": {
+        "mean": 14,
+        "median": 13,
+        "min": 13,
+        "max": 16
+      },
+      "tool_calls_total": {
+        "mean": 31.667,
+        "median": 30,
+        "min": 29,
+        "max": 36
+      },
+      "codegraph_calls": {
+        "mean": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "codegraph_time_s": {
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "total_tool_overhead_s": {
+        "mean": 171.0,
+        "median": 170.0,
+        "min": 157.0,
+        "max": 186.0
+      },
+      "input_tokens": {
+        "mean": 90338,
+        "median": 88913,
+        "min": 85787,
+        "max": 96314
+      },
+      "cache_read_tokens": {
+        "mean": 693189.333,
+        "median": 657960,
+        "min": 596866,
+        "max": 824742
+      },
+      "output_tokens": {
+        "mean": 11346,
+        "median": 11769,
+        "min": 10424,
+        "max": 11845
+      },
+      "total_tokens": {
+        "mean": 101684,
+        "median": 100758,
+        "min": 97556,
+        "max": 106738
+      },
+      "unique_files_read": {
+        "mean": 19.333,
+        "median": 18,
+        "min": 17,
+        "max": 23
+      },
+      "duplicate_file_reads": {
+        "mean": 3,
+        "median": 3,
+        "min": 2,
+        "max": 4
+      },
+      "precision": {
+        "mean": 0.421,
+        "median": 0.4,
+        "min": 0.4,
+        "max": 0.462
+      },
+      "recall": {
+        "mean": 0.857,
+        "median": 0.857,
+        "min": 0.857,
+        "max": 0.857
+      },
+      "f1": {
+        "mean": 0.564,
+        "median": 0.545,
+        "min": 0.545,
+        "max": 0.6
+      },
+      "missed_critical_count": {
+        "mean": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "T4_ripgrep": {
+      "sessions": 3,
+      "task_pass_count": 3,
+      "task_pass_rate": 1.0,
+      "avg_quality_pct": 100.0,
+      "runtime_error_sessions": 1,
+      "protocol_violation_sessions": 0,
+      "api_cost_usd": "N/A",
+      "e2e_duration_s": {
+        "mean": 110.0,
+        "median": 107.0,
+        "min": 79.0,
+        "max": 144.0
+      },
+      "time_to_relevant_context_s": {
+        "mean": 36.333,
+        "median": 23.0,
+        "min": 18.0,
+        "max": 68.0
+      },
+      "planner_turns": {
+        "mean": 11.333,
+        "median": 11,
+        "min": 9,
+        "max": 14
+      },
+      "tool_calls_total": {
+        "mean": 24.667,
+        "median": 29,
+        "min": 14,
+        "max": 31
+      },
+      "codegraph_calls": {
+        "mean": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "codegraph_time_s": {
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "total_tool_overhead_s": {
+        "mean": 99.0,
+        "median": 91.0,
+        "min": 78.0,
+        "max": 128.0
+      },
+      "input_tokens": {
+        "mean": 71782.333,
+        "median": 68374,
+        "min": 62428,
+        "max": 84545
+      },
+      "cache_read_tokens": {
+        "mean": 337125,
+        "median": 335217,
+        "min": 279958,
+        "max": 396200
+      },
+      "output_tokens": {
+        "mean": 10537.667,
+        "median": 9162,
+        "min": 8370,
+        "max": 14081
+      },
+      "total_tokens": {
+        "mean": 82320,
+        "median": 76744,
+        "min": 71590,
+        "max": 98626
+      },
+      "unique_files_read": {
+        "mean": 12,
+        "median": 14,
+        "min": 6,
+        "max": 16
+      },
+      "duplicate_file_reads": {
+        "mean": 5,
+        "median": 4,
+        "min": 2,
+        "max": 9
+      },
+      "precision": {
+        "mean": 0.592,
+        "median": 0.591,
+        "min": 0.565,
+        "max": 0.619
+      },
+      "recall": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "f1": {
+        "mean": 0.743,
+        "median": 0.743,
+        "min": 0.722,
+        "max": 0.765
+      },
+      "missed_critical_count": {
+        "mean": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "T4_adaptive_v1": {
+      "sessions": 3,
+      "task_pass_count": 3,
+      "task_pass_rate": 1.0,
+      "avg_quality_pct": 100.0,
+      "runtime_error_sessions": 0,
+      "protocol_violation_sessions": 0,
+      "api_cost_usd": "N/A",
+      "e2e_duration_s": {
+        "mean": 58.333,
+        "median": 61.0,
+        "min": 50.0,
+        "max": 64.0
+      },
+      "time_to_relevant_context_s": {
+        "mean": 3.667,
+        "median": 3.0,
+        "min": 3.0,
+        "max": 5.0
+      },
+      "planner_turns": {
+        "mean": 8.333,
+        "median": 9,
+        "min": 7,
+        "max": 9
+      },
+      "tool_calls_total": {
+        "mean": 13,
+        "median": 13,
+        "min": 13,
+        "max": 13
+      },
+      "codegraph_calls": {
+        "mean": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "codegraph_time_s": {
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "total_tool_overhead_s": {
+        "mean": 53.333,
+        "median": 52.0,
+        "min": 48.0,
+        "max": 60.0
+      },
+      "input_tokens": {
+        "mean": 52627,
+        "median": 53023,
+        "min": 46950,
+        "max": 57908
+      },
+      "cache_read_tokens": {
+        "mean": 231652.333,
+        "median": 233619,
+        "min": 171211,
+        "max": 290127
+      },
+      "output_tokens": {
+        "mean": 8349.667,
+        "median": 9158,
+        "min": 6159,
+        "max": 9732
+      },
+      "total_tokens": {
+        "mean": 60976.667,
+        "median": 62755,
+        "min": 53109,
+        "max": 67066
+      },
+      "unique_files_read": {
+        "mean": 6.667,
+        "median": 7,
+        "min": 4,
+        "max": 9
+      },
+      "duplicate_file_reads": {
+        "mean": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "precision": {
+        "mean": 0.657,
+        "median": 0.684,
+        "min": 0.565,
+        "max": 0.722
+      },
+      "recall": {
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "f1": {
+        "mean": 0.791,
+        "median": 0.812,
+        "min": 0.722,
+        "max": 0.839
+      },
+      "missed_critical_count": {
+        "mean": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "T5_ripgrep": {
+      "sessions": 3,
+      "task_pass_count": 3,
+      "task_pass_rate": 1.0,
+      "avg_quality_pct": 100.0,
+      "runtime_error_sessions": 0,
+      "protocol_violation_sessions": 0,
+      "api_cost_usd": "N/A",
+      "e2e_duration_s": {
+        "mean": 73.333,
+        "median": 71.0,
+        "min": 68.0,
+        "max": 81.0
+      },
+      "time_to_relevant_context_s": {
+        "mean": 3.667,
+        "median": 4.0,
+        "min": 3.0,
+        "max": 4.0
+      },
+      "planner_turns": {
+        "mean": 12,
+        "median": 12,
+        "min": 11,
+        "max": 13
+      },
+      "tool_calls_total": {
+        "mean": 28.667,
+        "median": 25,
+        "min": 24,
+        "max": 37
+      },
+      "codegraph_calls": {
+        "mean": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "codegraph_time_s": {
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "total_tool_overhead_s": {
+        "mean": 92.0,
+        "median": 96.0,
+        "min": 74.0,
+        "max": 106.0
+      },
+      "input_tokens": {
+        "mean": 99544.333,
+        "median": 99794,
+        "min": 80290,
+        "max": 118549
+      },
+      "cache_read_tokens": {
+        "mean": 596028.667,
+        "median": 561522,
+        "min": 472810,
+        "max": 753754
+      },
+      "output_tokens": {
+        "mean": 12613.333,
+        "median": 12273,
+        "min": 11732,
+        "max": 13835
+      },
+      "total_tokens": {
+        "mean": 112157.667,
+        "median": 113629,
+        "min": 92022,
+        "max": 130822
+      },
+      "unique_files_read": {
+        "mean": 21.333,
+        "median": 18,
+        "min": 17,
+        "max": 29
+      },
+      "duplicate_file_reads": {
+        "mean": 1,
+        "median": 1,
+        "min": 0,
+        "max": 2
+      },
+      "precision": {
+        "mean": 0.349,
+        "median": 0.355,
+        "min": 0.312,
+        "max": 0.379
+      },
+      "recall": {
+        "mean": 0.889,
+        "median": 0.917,
+        "min": 0.833,
+        "max": 0.917
+      },
+      "f1": {
+        "mean": 0.501,
+        "median": 0.512,
+        "min": 0.455,
+        "max": 0.537
+      },
+      "missed_critical_count": {
+        "mean": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "T5_adaptive_v1": {
+      "sessions": 3,
+      "task_pass_count": 3,
+      "task_pass_rate": 1.0,
+      "avg_quality_pct": 100.0,
+      "runtime_error_sessions": 0,
+      "protocol_violation_sessions": 0,
+      "api_cost_usd": "N/A",
+      "e2e_duration_s": {
+        "mean": 83.333,
+        "median": 85.0,
+        "min": 55.0,
+        "max": 110.0
+      },
+      "time_to_relevant_context_s": {
+        "mean": 4.667,
+        "median": 5.0,
+        "min": 3.0,
+        "max": 6.0
+      },
+      "planner_turns": {
+        "mean": 12.667,
+        "median": 13,
+        "min": 10,
+        "max": 15
+      },
+      "tool_calls_total": {
+        "mean": 27.333,
+        "median": 27,
+        "min": 20,
+        "max": 35
+      },
+      "codegraph_calls": {
+        "mean": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "codegraph_time_s": {
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "total_tool_overhead_s": {
+        "mean": 104.333,
+        "median": 101.0,
+        "min": 83.0,
+        "max": 129.0
+      },
+      "input_tokens": {
+        "mean": 90475,
+        "median": 95508,
+        "min": 68312,
+        "max": 107605
+      },
+      "cache_read_tokens": {
+        "mean": 585114.333,
+        "median": 593009,
+        "min": 365063,
+        "max": 797271
+      },
+      "output_tokens": {
+        "mean": 11750.667,
+        "median": 11793,
+        "min": 9177,
+        "max": 14282
+      },
+      "total_tokens": {
+        "mean": 102225.667,
+        "median": 107301,
+        "min": 77489,
+        "max": 121887
+      },
+      "unique_files_read": {
+        "mean": 18.333,
+        "median": 19,
+        "min": 14,
+        "max": 22
+      },
+      "duplicate_file_reads": {
+        "mean": 2,
+        "median": 1,
+        "min": 1,
+        "max": 4
+      },
+      "precision": {
+        "mean": 0.315,
+        "median": 0.314,
+        "min": 0.31,
+        "max": 0.321
+      },
+      "recall": {
+        "mean": 0.806,
+        "median": 0.75,
+        "min": 0.75,
+        "max": 0.917
+      },
+      "f1": {
+        "mean": 0.452,
+        "median": 0.45,
+        "min": 0.439,
+        "max": 0.468
+      },
+      "missed_critical_count": {
+        "mean": 0,
+        "median": 0,
+        "min": 0,
+        "max": 0
+      }
+    }
+  }
+}

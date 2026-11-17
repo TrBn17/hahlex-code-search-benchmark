@@ -1,0 +1,155 @@
+{
+  "workspace_root": "D:\\Projects\\hahlex-edu",
+  "tasks": [
+    {
+      "id": "T1",
+      "category": "Feature Discovery (Business Description)",
+      "title": "Tìm vị trí triển khai tính năng ước tính chi phí chấm bài AI theo token/credit",
+      "prompt": "Tìm vị trí triển khai tính năng dự toán chi phí chấm bài AI (ước tính số token/credit trước khi giáo viên bấm 'Đồng ý chấm'), bao gồm backend tính toán tỷ lệ, endpoint trả ước tính, và các module liên quan.",
+      "ground_truth_files": [
+        "education-platform/apps/api/src/modules/education/kernel/ai-grading-estimate.ts",
+        "education-platform/apps/api/src/modules/education/kernel/ai-grading-credits.ts",
+        "education-platform/apps/api/src/modules/education/subjects/english/kernel/ai-grading/approve.ts",
+        "education-platform/apps/api/src/modules/education/http/ai-messages.controller.ts",
+        "education-platform/apps/api/src/modules/ai-bridge/ai-platform.client.ts"
+      ],
+      "critical_files": [
+        "education-platform/apps/api/src/modules/education/kernel/ai-grading-estimate.ts",
+        "education-platform/apps/api/src/modules/education/subjects/english/kernel/ai-grading/approve.ts",
+        "education-platform/apps/api/src/modules/education/http/ai-messages.controller.ts"
+      ],
+      "queries": {
+        "baseline_patterns": ["estimateTokens", "ai-grading-estimate", "GradingRates"],
+        "rg_pattern": "estimateTokens|GradingRates|ai-grading-estimate",
+        "codegraph_explore": "estimateTokens",
+        "codegraph_query": "GradingRates",
+        "hybrid_rg": "estimateTokens|ai-grading-estimate",
+        "hybrid_cg": "estimateTokens"
+      }
+    },
+    {
+      "id": "T2",
+      "category": "API -> Service -> Database Trace",
+      "title": "Truy vết luồng công bố bảng điểm (Gradebook publish) từ API đến DB",
+      "prompt": "Truy vết luồng xử lý của tính năng công bố bảng điểm (publishGradebook) từ HTTP Controller, qua các hàm kernel/service, đến các bảng database được đọc/ghi.",
+      "ground_truth_files": [
+        "education-platform/apps/api/src/modules/education/http/gradebook.controller.ts",
+        "education-platform/apps/api/src/modules/education/kernel/gradebook/publish.ts",
+        "education-platform/apps/api/src/modules/education/kernel/gradebook/load.ts",
+        "education-platform/apps/api/src/modules/education/kernel/gradebook/calc.ts",
+        "education-platform/apps/api/src/modules/education/kernel/gradebook/refusals.ts",
+        "education-platform/apps/api/src/db/schema.ts"
+      ],
+      "critical_files": [
+        "education-platform/apps/api/src/modules/education/http/gradebook.controller.ts",
+        "education-platform/apps/api/src/modules/education/kernel/gradebook/publish.ts",
+        "education-platform/apps/api/src/db/schema.ts"
+      ],
+      "queries": {
+        "baseline_patterns": ["publishGradebook", "gradebookPublications"],
+        "rg_pattern": "publishGradebook|gradebookPublications",
+        "codegraph_explore": "publishGradebook",
+        "codegraph_query": "gradebookPublications",
+        "hybrid_rg": "gradebookPublications",
+        "hybrid_cg": "publishGradebook"
+      }
+    },
+    {
+      "id": "T3",
+      "category": "Cross-Module Bug Root-Cause Investigation",
+      "title": "Điều tra lỗi từ chối tính năng hoặc lệch credit AI grading giữa education và ai-bridge",
+      "prompt": "Nếu xảy ra lỗi trừ/hoàn credit hoặc từ chối tính năng AI grading không khớp giữa education và ai-bridge, xác định các module/file xử lý CreditMetering, ai-grading-credits, plan-features và feature-refusal.",
+      "ground_truth_files": [
+        "education-platform/apps/api/src/modules/education/kernel/ai-grading-credits.ts",
+        "education-platform/apps/api/src/modules/education/kernel/ai-grading-estimate.ts",
+        "education-platform/apps/api/src/modules/education/subjects/english/kernel/ai-grading/approve.ts",
+        "education-platform/apps/api/src/modules/ai-bridge/feature-refusal.ts",
+        "education-platform/apps/api/src/modules/ai-bridge/plan-features.ts",
+        "education-platform/apps/api/src/modules/ai-bridge/ai-platform.client.ts",
+        "education-platform/apps/api/src/platform/gates/features.ts"
+      ],
+      "critical_files": [
+        "education-platform/apps/api/src/modules/education/kernel/ai-grading-credits.ts",
+        "education-platform/apps/api/src/modules/ai-bridge/feature-refusal.ts",
+        "education-platform/apps/api/src/modules/ai-bridge/plan-features.ts"
+      ],
+      "queries": {
+        "baseline_patterns": ["CreditMetering", "FeatureRefusal", "assertAiFeature"],
+        "rg_pattern": "CreditMetering|FeatureRefusal|assertAiFeature",
+        "codegraph_explore": "CreditMetering",
+        "codegraph_query": "FeatureRefusal",
+        "hybrid_rg": "FeatureRefusal|assertAiFeature",
+        "hybrid_cg": "CreditMetering"
+      }
+    },
+    {
+      "id": "T4",
+      "category": "Impact Analysis / Blast Radius",
+      "title": "Xác định các thành phần bị ảnh hưởng khi thay đổi hàm offsetPage",
+      "prompt": "Nếu thay đổi signature hoặc behavior của hàm offsetPage (trong education/http/page-query.ts), xác định tất cả controller và module bị ảnh hưởng.",
+      "ground_truth_files": [
+        "education-platform/apps/api/src/modules/education/http/page-query.ts",
+        "education-platform/apps/api/src/modules/education/http/staff.controller.ts",
+        "education-platform/apps/api/src/modules/education/http/submission-staff.controller.ts",
+        "education-platform/apps/api/src/modules/education/http/teacher-profiles.controller.ts",
+        "education-platform/apps/api/src/modules/education/http/enrollment-lifecycle.controller.ts",
+        "education-platform/apps/api/src/modules/education/http/catalog.controller.ts",
+        "education-platform/apps/api/src/modules/organizations/http/member-page-query.ts",
+        "education-platform/apps/api/src/modules/platform-admin/http/platform-dashboard.controller.ts",
+        "education-platform/apps/api/src/modules/platform-admin/http/platform-survey.controller.ts",
+        "education-platform/apps/api/src/modules/platform-admin/http/platform.controller.ts",
+        "education-platform/apps/api/src/modules/platform-broadcasts/http/platform-broadcasts.controller.ts",
+        "education-platform/apps/api/src/modules/support/http/platform-support.controller.ts",
+        "education-platform/apps/api/src/modules/support/http/support.controller.ts"
+      ],
+      "critical_files": [
+        "education-platform/apps/api/src/modules/education/http/page-query.ts",
+        "education-platform/apps/api/src/modules/education/http/staff.controller.ts",
+        "education-platform/apps/api/src/modules/platform-admin/http/platform.controller.ts",
+        "education-platform/apps/api/src/modules/support/http/support.controller.ts"
+      ],
+      "queries": {
+        "baseline_patterns": ["offsetPage"],
+        "rg_pattern": "\\boffsetPage\\b",
+        "codegraph_impact": "offsetPage",
+        "codegraph_callers": "offsetPage",
+        "hybrid_rg": "\\boffsetPage\\b",
+        "hybrid_cg": "offsetPage"
+      }
+    },
+    {
+      "id": "T5",
+      "category": "Similar Logic / Refactoring Discovery",
+      "title": "Tìm tất cả vị trí triển khai xác thực service-to-service (ServicePrincipalGuard / service_auth)",
+      "prompt": "Tìm tất cả các vị trí triển khai hoặc sử dụng xác thực service-to-service (ServicePrincipalGuard / service-principal / service_auth) trên cả education-platform và ai-platform để kiểm tra tính nhất quán và tái sử dụng.",
+      "ground_truth_files": [
+        "ai-platform/src/ai_platform/security/service_auth.py",
+        "education-platform/apps/api/src/modules/ai-bridge/service-principal.guard.ts",
+        "education-platform/apps/api/src/modules/ai-bridge/ai-bridge.module.ts",
+        "education-platform/apps/api/src/modules/ai-bridge/dry-run.interceptor.ts",
+        "education-platform/apps/api/src/modules/ai-bridge/http/internal-education.controller.ts",
+        "education-platform/apps/api/src/modules/ai-bridge/http/internal-imports.controller.ts",
+        "education-platform/apps/api/src/modules/ai-bridge/http/internal-lessons.controller.ts",
+        "education-platform/apps/api/src/modules/ai-bridge/http/internal-platform-events.controller.ts",
+        "education-platform/apps/api/src/modules/ai-bridge/http/internal-view-as.controller.ts",
+        "education-platform/apps/api/src/modules/ai-mcp/mcp.controller.ts",
+        "education-platform/apps/api/src/modules/ai-mcp/context.ts",
+        "education-platform/apps/api/src/modules/platform-admin/http/platform-quality-tracing.controller.ts"
+      ],
+      "critical_files": [
+        "ai-platform/src/ai_platform/security/service_auth.py",
+        "education-platform/apps/api/src/modules/ai-bridge/service-principal.guard.ts",
+        "education-platform/apps/api/src/modules/ai-bridge/http/internal-education.controller.ts",
+        "education-platform/apps/api/src/modules/ai-mcp/mcp.controller.ts"
+      ],
+      "queries": {
+        "baseline_patterns": ["ServicePrincipalGuard", "service_auth", "verify_service_token"],
+        "rg_pattern": "ServicePrincipalGuard|service-principal|service_auth|verify_service_token",
+        "codegraph_explore": "ServicePrincipalGuard",
+        "codegraph_query": "service_auth",
+        "hybrid_rg": "ServicePrincipalGuard|service_auth|verify_service_token",
+        "hybrid_cg": "ServicePrincipalGuard"
+      }
+    }
+  ]
+}

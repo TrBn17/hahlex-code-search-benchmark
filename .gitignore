@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+graphify-out/
+.codegraph/
+.DS_Store
+Thumbs.db
