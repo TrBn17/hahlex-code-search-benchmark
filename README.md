@@ -1,16 +1,31 @@
-# Hahlex LMS — Code Search Benchmark (Phases 1–4)
+<div align="center">
+  <img src="https://img3.pixhost.to/images/6977/800059020_image.png" alt="Jason Lab Banner" width="100%" />
+  <h1>Hahlex Code Search Benchmark</h1>
+</div>
 
-Empirical evaluation of code search tools and strategies (`Baseline`, `ripgrep`, `CodeGraph`, `Graphify`, and `Adaptive Search`) for AI Coding Agents on the **Hahlex LMS** codebase (`education-platform` NestJS/TypeScript + `ai-platform` Python/FastAPI).
+Empirical benchmark evaluating code search tools and strategies (`Baseline`, `ripgrep`, `CodeGraph`, `Graphify`, and `Adaptive Search`) for AI Coding Agents on **Hahlex LMS** (`education-platform` NestJS/TypeScript + `ai-platform` Python/FastAPI). Across four phases (134 total runs/sessions), **`ripgrep` (`rg`)** was selected as the default code-search strategy in `AGENTS.md`:
 
-**Final Conclusion (Phase 4):** **`ripgrep` (`rg`)** was selected as the default code-search strategy in `AGENTS.md`. Under `Adaptive v1` (*escalate to CodeGraph only if `rg` does not provide sufficient evidence*), **12/12** agent sessions stayed on `rg` + `read_file` (**0/12** CodeGraph calls) and achieved a **100% task pass rate** with **0** missed critical files.
+| Phase | Question it answers | Headline outcome |
+|---|---|---|
+| `Phase 1` (60 tool runs) | Which search CLI is fastest, lightest, and most accurate standalone? | `ripgrep` wins: **83.8 ms** median latency, **0.7445 F1**, **100% (5/5)** task success, **9 MB** RAM |
+| `Phase 2` (20 agent sessions) | How do tools affect real AI agent completion, tokens, and recall? | `Adaptive` reaches **23.4s** context time & **0.933** recall; `Baseline` hits **100%** success (`n=5`) |
+| `Phase 3` (30 agent sessions) | Does `Graphify` or `Adaptive v1/v2` beat `ripgrep` for `flash` agents? | `Adaptive v1` hits **100%** success & **0.983** recall but at **123.6s** E2E; `Graphify` is **146.2s** E2E & **60%** success |
+| `Phase 4` (24 agent sessions) | Does `Adaptive v1` (`rg` + `CodeGraph` on-demand) beat `ripgrep-only`? | **No escalation needed:** `12/12` `Adaptive v1` runs stayed on `rg` (**0** CodeGraph calls); both arms hit **100% (12/12)** pass rate |
 
----
+## How it works
 
-## Summary of Results Across Phases 1–4
+```
+5 LMS tasks (T1–T5) ──▶ isolated `flash` subagents ──▶ transcript.jsonl ──▶ analyze_phase*.py ──▶ docs/code-search-*.md
+  (ground truth)          (randomized arm order)         (tokens, latency)     (P/R/F1, rubric)      (final AGENTS.md rule)
+```
 
-### Phase 4 — Final Validation: `ripgrep` vs `Adaptive v1` (24 Agent Sessions, `flash`, T2–T5 × 3 reps)
+- **Grounded in real LMS tasks (`T1–T5`):** Feature discovery (`ai-grading-estimate`), API→Service→DB trace (`publishGradebook`), cross-module bug triage (`CreditMetering` / `plan-features` / `feature-refusal`), blast-radius impact (`offsetPage`), and cross-repo auth consistency (`ServicePrincipalGuard` / `service_auth`).
+- **Isolated, randomized runs:** Every agent session starts with a clean context, receives no ground truth, runs in randomized wave order, and has its telemetry (`input_tokens`, `cache_read_tokens`, `output_tokens`, timestamps, tool calls, duplicate reads) parsed directly from `transcript.jsonl`.
+- **Two-level scoring:** Retrieval Quality (`Precision`, `Recall`, `F1`, missed critical files, time to relevant context) is scored separately from Agent Task Quality (acceptance rubric & evidence verification).
 
-> Full report: [docs/code-search-final-benchmark.md](docs/code-search-final-benchmark.md) · Raw summary: [phase4/summary.json](benchmarks/code-search/phase4/summary.json)
+## Results
+
+### Phase 4 — Final Validation: `ripgrep` vs `Adaptive v1` (24 sessions, `flash`, T2–T5 × 3 reps)
 
 | Metric | Arm B (`ripgrep-only`, n=12) Mean \| Med \| Min–Max | Arm D (`Adaptive v1`, n=12) Mean \| Med \| Min–Max |
 |---|---|---|
@@ -27,7 +42,8 @@ Empirical evaluation of code search tools and strategies (`Baseline`, `ripgrep`,
 | **Duplicate File Reads** | 3.42 \| 3.0 \| 0–9 | 3.17 \| 2.5 \| 0–9 |
 | **API Cost (USD)** | `N/A` (internal `flash` pricing not exposed) | `N/A` |
 
-#### Per-Task Breakdown (Phase 4, `n = 3` per cell)
+<details>
+<summary>Phase 4 per-task breakdown (n = 3 per cell)</summary>
 
 | Task × Arm | Pass | P / R / F1 (Mean) | Context Time Mean (Med) | E2E Mean (Med, Min–Max) | Turns / Tools | Input / Output Tokens | Dup Reads |
 |---|---:|---|---|---|---|---|---|
@@ -40,11 +56,9 @@ Empirical evaluation of code search tools and strategies (`Baseline`, `ripgrep`,
 | `T5_ripgrep` | 3/3 | 0.349 / 0.889 / 0.501 | 3.7s (4.0s) | 73.3s (71.0s, 68–81s) | 12.0 / 28.7 | 99,544 / 12,613 | 1.00 |
 | `T5_adaptive_v1` | 3/3 | 0.315 / 0.806 / 0.452 | 4.7s (5.0s) | 83.3s (85.0s, 55–110s) | 12.7 / 27.3 | 90,475 / 11,751 | 2.00 |
 
----
+</details>
 
-### Phase 3 — Graphify vs CodeGraph vs ripgrep vs Adaptive (30 Agent Sessions, `n = 5` per arm)
-
-> Full report: [docs/code-search-graphify-benchmark.md](docs/code-search-graphify-benchmark.md) · Raw summary: [phase3/phase3_summary.json](benchmarks/code-search/phase3/phase3_summary.json)
+### Phase 3 — Graphify vs CodeGraph vs ripgrep vs Adaptive (30 sessions, `n = 5` per arm)
 
 | Arm (`n = 5`) | Task Success | Recall / Precision / F1 | Mean Context Time | Mean E2E (Median) | LLM Turns / Tools | Input / Output Tokens |
 |---|---:|---|---:|---:|---:|---:|
@@ -55,11 +69,7 @@ Empirical evaluation of code search tools and strategies (`Baseline`, `ripgrep`,
 | **Graphify** | 60% | 0.791 / 0.475 / 0.591 | 72.0s | 146.2s (137.0s) | 12.0 / 21.0 | 82,548 / 15,639 |
 | **Adaptive v2** | 80% | 0.767 / 0.334 / 0.451 | 46.2s | 114.0s (101.0s) | 12.0 / 27.2 | 125,682 / 9,826 |
 
----
-
-### Phase 2 — Agent-Level Benchmark (20 Agent Sessions, `n = 5` per arm)
-
-> Full report: [docs/code-search-agent-benchmark.md](docs/code-search-agent-benchmark.md) · Raw summary: [agent_summary.json](benchmarks/code-search/agent_summary.json)
+### Phase 2 — Agent-Level Benchmark (20 sessions, `n = 5` per arm)
 
 | Arm (`n = 5`) | Task Success | Recall / Precision | Mean Context Time | Mean E2E | LLM Turns / Tools | Input / Output Tokens |
 |---|---:|---|---:|---:|---:|---:|
@@ -68,11 +78,7 @@ Empirical evaluation of code search tools and strategies (`Baseline`, `ripgrep`,
 | **CodeGraph** | 60% | 0.867 / 0.465 | 45.6s | 126.8s | 10.2 / 16.8 | 82,823 / 12,882 |
 | **Adaptive** | 80% | 0.933 / 0.418 | **23.4s** | 92.2s | 11.2 / 23.6 | 82,034 / **9,448** |
 
----
-
-### Phase 1 — Tool-Level Benchmark (60 Runs, 5 Tasks × 4 Methods × 3 reps)
-
-> Full report: [docs/code-search-benchmark.md](docs/code-search-benchmark.md) · Raw summary: [summary.json](benchmarks/code-search/summary.json)
+### Phase 1 — Tool-Level Benchmark (60 runs, 5 Tasks × 4 Methods × 3 reps)
 
 | Metric | Baseline (`git grep`) | ripgrep (`rg`) | CodeGraph (`codegraph`) | Hybrid (`rg` + `codegraph`) |
 |---|---:|---:|---:|---:|
@@ -85,13 +91,22 @@ Empirical evaluation of code search tools and strategies (`Baseline`, `ripgrep`,
 | **Task Success Rate** | 80% (4/5) | **100% (5/5)** | 60% (3/5) | 80% (4/5) |
 | **Peak RAM (Median RSS)** | 45.18 MB | **8.99 MB** | 430.09 MB | 428.47 MB |
 
----
+## Quick start (reproduce analysis)
 
-## Repository Structure
+```powershell
+# Re-run Phase 1 tool-level benchmark (requires Hahlex LMS workspace + rg + codegraph)
+python benchmarks/code-search/run_benchmark.py
 
-- [benchmarks/code-search/tasks.json](benchmarks/code-search/tasks.json) — 5 representative LMS tasks (`T1–T5`) and ground truth
-- [benchmarks/code-search/run_benchmark.py](benchmarks/code-search/run_benchmark.py) — Phase 1 tool-level benchmark runner
-- [benchmarks/code-search/analyze_agent_runs.py](benchmarks/code-search/analyze_agent_runs.py) — Phase 2 agent transcript analyzer
-- [benchmarks/code-search/phase3/analyze_phase3.py](benchmarks/code-search/phase3/analyze_phase3.py) — Phase 3 analyzer
-- [benchmarks/code-search/phase4/analyze_phase4.py](benchmarks/code-search/phase4/analyze_phase4.py) — Phase 4 analyzer (`results.json`, `summary.json`)
-- [docs/](docs/) — Detailed reports (`code-search-benchmark.md`, `code-search-agent-benchmark.md`, `code-search-graphify-benchmark.md`, `code-search-final-benchmark.md`)
+# Re-compute Phase 2–4 metrics from recorded transcripts
+python benchmarks/code-search/analyze_agent_runs.py
+python benchmarks/code-search/phase3/analyze_phase3.py
+python benchmarks/code-search/phase4/analyze_phase4.py
+```
+
+## More
+
+- [`benchmarks/code-search/tasks.json`](benchmarks/code-search/tasks.json): 5 representative LMS tasks (`T1–T5`) and verified ground-truth files.
+- [`docs/code-search-benchmark.md`](docs/code-search-benchmark.md): Phase 1 tool-level report.
+- [`docs/code-search-agent-benchmark.md`](docs/code-search-agent-benchmark.md): Phase 2 agent-level & Adaptive Search report.
+- [`docs/code-search-graphify-benchmark.md`](docs/code-search-graphify-benchmark.md): Phase 3 Graphify vs CodeGraph vs ripgrep report.
+- [`docs/code-search-final-benchmark.md`](docs/code-search-final-benchmark.md): Phase 4 final validation & `AGENTS.md` decision report.
